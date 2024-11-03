@@ -63,6 +63,7 @@ async def process_your_stories(callback: CallbackQuery, state: FSMContext) -> No
                                           f'После отправки я получу это сообщение и отправлю в группу анонимно.'
                                           f' Имя свое ты откроешь только если захочешь этого ❤️',
                                      reply_markup=kb.keyboard_back())
+    await state.update_data(stories='')
     await state.set_state(User.stories)
 
 
@@ -77,7 +78,10 @@ async def answer_your_stories(message: Message, bot: Bot, state: FSMContext) -> 
         pass
     await message.answer(text=f'Отлично, отправить?',
                          reply_markup=kb.keyboard_your_stories())
-    await state.update_data(stories=message.html_text)
+    data = await state.get_data()
+    stories = data['stories']
+    stories += message.html_text
+    await state.update_data(stories=stories)
     await state.set_state(state=None)
 
 
@@ -121,6 +125,7 @@ async def process_help_me(callback: CallbackQuery, state: FSMContext) -> None:
                                           f'5. Способы связи с тобой (номер телефона, страница в ВК и тд)\n'
                                           f'Мне важна максимальная честность ❤️️',
                                      reply_markup=kb.keyboard_back())
+    await state.update_data(helpme='')
     await state.set_state(User.helpme)
 
 
@@ -135,7 +140,11 @@ async def answer_helpme(message: Message, bot: Bot, state: FSMContext) -> None:
         pass
     await message.answer(text=f'Отлично, отправить?',
                          reply_markup=kb.keyboard_your_helpme())
-    await state.update_data(helpme=message.html_text)
+
+    data = await state.get_data()
+    helpme = data['helpme']
+    helpme += message.html_text
+    await state.update_data(helpme=helpme)
     await state.set_state(state=None)
 
 
