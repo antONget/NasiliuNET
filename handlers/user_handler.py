@@ -68,8 +68,11 @@ async def process_your_stories(callback: CallbackQuery, state: FSMContext) -> No
 @error_handler
 async def answer_your_stories(message: Message, bot: Bot, state: FSMContext) -> None:
     logging.info(f'answer_your_stories: {message.chat.id}')
-    await bot.delete_message(chat_id=message.chat.id,
-                             message_id=message.message_id-1)
+    try:
+        await bot.delete_message(chat_id=message.chat.id,
+                                 message_id=message.message_id-1)
+    except:
+        pass
     await message.answer(text=f'Отлично, отправить?',
                          reply_markup=kb.keyboard_your_stories())
     await state.update_data(stories=message.html_text)
@@ -116,8 +119,11 @@ async def process_help_me(callback: CallbackQuery, state: FSMContext) -> None:
 @error_handler
 async def answer_helpme(message: Message, bot: Bot, state: FSMContext) -> None:
     logging.info(f'answer_helpme: {message.chat.id}')
-    await bot.delete_message(chat_id=message.chat.id,
-                             message_id=message.message_id-1)
+    try:
+        await bot.delete_message(chat_id=message.chat.id,
+                                 message_id=message.message_id-1)
+    except:
+        pass
     await message.answer(text=f'Отлично, отправить?',
                          reply_markup=kb.keyboard_your_helpme())
     await state.update_data(helpme=message.html_text)
