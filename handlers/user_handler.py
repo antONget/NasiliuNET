@@ -92,7 +92,7 @@ async def process_stories_send(callback: CallbackQuery, state: FSMContext, bot: 
     logging.info(f'process_stories_send: {callback.message.chat.id}')
     data = await state.get_data()
     stories = data['stories']
-    text = f'Получено обращение от @{callback.from_user.username}/{callback.from_user.id}\n\n' + stories
+    text = f'Получена история от @{callback.from_user.username}/{callback.from_user.id}\n\n' + stories
     await send_message_admins(bot=bot, text=text)
     await callback.message.answer(text=f'Я получила твою историю, спасибо за доверие ❤️',
                                   reply_markup=kb.keyboard_start_menu())
@@ -136,7 +136,7 @@ async def process_stories_send(callback: CallbackQuery, state: FSMContext, bot: 
     logging.info(f'process_stories_send: {callback.message.chat.id}')
     data = await state.get_data()
     helpme = data['helpme']
-    text = f'Получено обращение от @{callback.from_user.username}/{callback.from_user.id}\n\n' + helpme
+    text = f'Получена жалоба от @{callback.from_user.username}/{callback.from_user.id}\n\n' + helpme
     await send_message_admins(bot=bot, text=text)
     await callback.message.answer(text=f'Я получила твое обращение, я постараюсь среагировать в ближайшее время!'
                                        f' Спасибо за доверие ❤️',
