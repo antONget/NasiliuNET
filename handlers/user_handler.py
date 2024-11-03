@@ -142,11 +142,11 @@ async def process_stories_send(callback: CallbackQuery, state: FSMContext, bot: 
 async def process_contacts(callback: CallbackQuery) -> None:
     logging.info(f'process_contacts: {callback.message.chat.id}')
     await callback.message.answer(text=f'☔️ Куда обратиться за помощью:\n\n'
-                                       f'https://nasiliu.net (сделать чтоб ссылка была текстом) *Насилию.нет*\n\n'
-                                       f'https://verimtebe.ru/consultations/ *ТЕБЕ ПОВЕРЯТ*\n\n'
-                                       f'https://crisiscenter.ru *ИНГО кризисный центр для женщин*\n\n'
+                                       f'<a href="https://nasiliu.net">*Насилию.нет*</a>\n\n'
+                                       f'<a href="https://verimtebe.ru/consultations"/>*ТЕБЕ ПОВЕРЯТ*</a>\n\n'
+                                       f'<a href="https://crisiscenter.ru">*ИНГО кризисный центр для женщин*</a>\n\n'
                                        f'💫  Запрос к начинающим терапевтам по минимальной цене через личные сообщения'
-                                       f' Наталье https://vk.com/idnatali1811\n\n'
-                                       f'💫  Психолог, гештальт-терапевт, платно\n\n'
-                                       f'https://vk.com/topic-212684860_49313719',
+                                       f' <a "href=https://vk.com/idnatali1811">Наталье</a>\n\n'
+                                       f'💫  <a href="https://vk.com/topic-212684860_49313719">'
+                                       f'Психолог, гештальт-терапевт, платно</a>\n\n',
                                   reply_markup=kb.keyboard_thanks())
