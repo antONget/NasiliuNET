@@ -149,7 +149,7 @@ async def process_contacts(callback: CallbackQuery) -> None:
     logging.info(f'process_contacts: {callback.message.chat.id}')
     await callback.message.answer(text=f'☔️ Куда обратиться за помощью:\n\n'
                                        f'<a href="https://nasiliu.net">*Насилию.нет*</a>\n\n'
-                                       f'<a href="https://verimtebe.ru/consultations"/>*ТЕБЕ ПОВЕРЯТ*</a>\n\n'
+                                       f'<a href="https://verimtebe.ru/consultations">*ТЕБЕ ПОВЕРЯТ*</a>\n\n'
                                        f'<a href="https://crisiscenter.ru">*ИНГО кризисный центр для женщин*</a>\n\n'
                                        f'💫  Запрос к начинающим терапевтам по минимальной цене через личные сообщения'
                                        f' <a "href=https://vk.com/idnatali1811">Наталье</a>\n\n'
