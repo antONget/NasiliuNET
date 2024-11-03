@@ -152,7 +152,7 @@ async def process_contacts(callback: CallbackQuery) -> None:
                                        f'<a href="https://verimtebe.ru/consultations">*ТЕБЕ ПОВЕРЯТ*</a>\n\n'
                                        f'<a href="https://crisiscenter.ru">*ИНГО кризисный центр для женщин*</a>\n\n'
                                        f'💫  Запрос к начинающим терапевтам по минимальной цене через личные сообщения'
-                                       f' <a "href="https://vk.com/idnatali1811">Наталье</a>\n\n'
+                                       f' <a href="https://vk.com/idnatali1811">Наталье</a>\n\n'
                                        f'💫  <a href="https://vk.com/topic-212684860_49313719">'
                                        f'Психолог, гештальт-терапевт, платно</a>\n\n',
                                   reply_markup=kb.keyboard_thanks())
