@@ -107,7 +107,10 @@ async def process_stories_send(callback: CallbackQuery, state: FSMContext, bot: 
     else:
         text = f'Получена история от @{callback.from_user.username}/{callback.from_user.id}\n\n' + stories
         await send_message_admins(bot=bot, text=text)
-    await callback.message.answer(text=f'Я получила твою историю, спасибо за доверие ❤️',
+    await callback.message.answer(text=f'Вот ссылка на группу, где скоро опубликую твою историю.'
+                                       f' Там ты можешь отреагировать на истории других людей в похожих ситуациях.'
+                                       f' Спасибо за доверие ❤️\n\n'
+                                       f'https://t.me/+CX0q8OcMy0ZlNjIy',
                                   reply_markup=kb.keyboard_start_menu())
 
 
