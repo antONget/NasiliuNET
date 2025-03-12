@@ -76,10 +76,11 @@ async def answer_your_stories(message: Message, bot: Bot, state: FSMContext) -> 
                                  message_id=message.message_id-1)
     except:
         pass
-    await message.answer(text=f'Отлично, отправить?',
-                         reply_markup=kb.keyboard_your_stories())
     data = await state.get_data()
     stories = data['stories']
+    if stories == '':
+        await message.answer(text=f'Отлично, отправить?',
+                             reply_markup=kb.keyboard_your_stories())
     stories += message.html_text
     await state.update_data(stories=stories)
     await state.set_state(state=None)
@@ -99,19 +100,20 @@ async def process_stories_send(callback: CallbackQuery, state: FSMContext, bot: 
     data = await state.get_data()
     stories = data['stories']
     if len(stories) > 4090:
-        text = f'Получена история от @{callback.from_user.username}/{callback.from_user.id}\n\n'
-        for stor_ in stories[::4090]:
-            text += stor_
-            await send_message_admins(bot=bot, text=text)
+        text = f'Получена история от <a href="tg://user?id={callback.from_user.id}">' \
+               f'@{callback.from_user.username}</a>\n\n'
+        n = 4000
+        for stor_ in [stories[i:i+n] for i in range(0, len(stories), n)]:
+            await send_message_admins(bot=bot, text=f'{text} {stor_}')
             text = ''
     else:
         text = f'Получена история от @{callback.from_user.username}/{callback.from_user.id}\n\n' + stories
         await send_message_admins(bot=bot, text=text)
-    await callback.message.answer(text=f'Вот ссылка на группу, где скоро опубликую твою историю.'
-                                       f' Там ты можешь отреагировать на истории других людей в похожих ситуациях.'
-                                       f' Спасибо за доверие ❤️\n\n'
-                                       f'https://t.me/+CX0q8OcMy0ZlNjIy',
-                                  reply_markup=kb.keyboard_start_menu())
+    await callback.message.edit_text(text=f'Вот ссылка на группу, где скоро опубликую твою историю.'
+                                          f' Там ты можешь отреагировать на истории других людей в похожих ситуациях.'
+                                          f' Спасибо за доверие ❤️\n\n'
+                                          f'https://t.me/+CX0q8OcMy0ZlNjIy',
+                                     reply_markup=kb.keyboard_start_menu())
 
 
 @router.callback_query(F.data == 'help_me')
@@ -159,9 +161,9 @@ async def process_stories_send(callback: CallbackQuery, state: FSMContext, bot: 
     helpme = data['helpme']
     if len(helpme) > 4090:
         text = f'Получена жалоба от @{callback.from_user.username}/{callback.from_user.id}\n\n'
-        for help_ in helpme[::4090]:
-            text += help_
-            await send_message_admins(bot=bot, text=text)
+        n = 4000
+        for stor_ in [helpme[i:i + n] for i in range(0, len(helpme), n)]:
+            await send_message_admins(bot=bot, text=f'{text} {stor_}')
             text = ''
     else:
         text = f'Получена жалоба от @{callback.from_user.username}/{callback.from_user.id}\n\n' + helpme
